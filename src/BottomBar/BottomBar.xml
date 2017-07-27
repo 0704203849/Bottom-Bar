@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="BottomBar.widget.BottomBar" needsEntityContext="true" xmlns="http://www.mendix.com/widget/1.0/">
+    <name>BottomBar</name>
+    <description>This widget is used as a Navigation Bar in a mobile or tab application.</description>
+
+    <icon />
+
+    <properties>
+        <property key="page1" type="entity">
+            <caption>page1</caption>
+            <category>Data source</category>
+            <description>The text string used by the widget.</description>
+        </property>    
+    </properties>
+</widget>
