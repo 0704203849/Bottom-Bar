@@ -6,10 +6,35 @@
     <icon />
 
     <properties>
-        <property key="page1" type="entity">
-            <caption>page1</caption>
-            <category>Data source</category>
-            <description>The text string used by the widget.</description>
-        </property>    
+        <property key="MicroflowToExecute1" type="microflow" required="true">
+            <caption>Microflow 1</caption>
+            <category>Behavior</category>
+            <description>The microflow to open page 1.</description>
+            <returnType type="Boolean" />
+        </property>
+        <property key="MicroflowToExecute2" type="microflow" required="true">
+            <caption>Microflow 2</caption>
+            <category>Behavior</category>
+            <description>The microflow to open page 2.</description>
+            <returnType type="Boolean" />
+        </property>
+        <property key="MicroflowToExecute3" type="microflow" required="true">
+            <caption>Microflow 3</caption>
+            <category>Behavior</category>
+            <description>The microflow to open page 3.</description>
+            <returnType type="Boolean" />
+        </property>
+         <property key="MicroflowToExecute4" type="microflow" required="true">
+            <caption>Microflow 4</caption>
+            <category>Behavior</category>
+            <description>The microflow to open page 4.</description>
+            <returnType type="Boolean" />
+        </property>
+        <property key="Usertext" type="string">
+            <caption>Text</caption>
+            <category>Appearance</category>
+            <description>Add a text!</description>
+            
+        </property>
     </properties>
 </widget>

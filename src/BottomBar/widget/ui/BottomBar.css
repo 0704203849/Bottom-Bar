@@ -11,19 +11,41 @@
     flex-direction: row;
     flex-wrap: no-wrap;
     justify-content: center;
-    /*z-index: 1000;*/
+    z-index: 1000;
 }
 
 .widget-bottom-bar > .bar-item {
     float: left;
-    padding-right: 20px;
-    
+    padding: 20px;
+    text-align: center;
+    align-items: center;
     flex: 1;
     align-self: flex-end;
-    
-    color:rgba(25,55,255,0.5);
-    background: rgba(0,231,0,0.4);
+        
+    color: white;
+    background:darkslategray;
     height: 100%;
     transition: flex 0.5s ease;
-    justify-content: center;
+    /*touch-action: 
+    /*justify-content: center;*/
+    
 }
+
+.widget-bottom-bar > .bar-item:active{
+    background:black;
+}
+
+.widget-bottom-bar > .bar-item:first-child{
+    border-right: 0.09px solid white;
+}
+
+.widget-bottom-bar > .bar-item.two{
+    border-right: 0.09px solid white;
+}
+
+.widget-bottom-bar > .bar-item:last-child{
+    border-left: 0.09px solid white;
+}
+/*.widget-bottom-bar > .bar-item:target{
+   background:black; 
+}*/
