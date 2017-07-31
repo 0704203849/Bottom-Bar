@@ -6,35 +6,44 @@
     <icon />
 
     <properties>
-        <property key="MicroflowToExecute1" type="microflow" required="true">
-            <caption>Microflow 1</caption>
-            <category>Behavior</category>
-            <description>The microflow to open page 1.</description>
-            <returnType type="Boolean" />
-        </property>
-        <property key="MicroflowToExecute2" type="microflow" required="true">
-            <caption>Microflow 2</caption>
-            <category>Behavior</category>
-            <description>The microflow to open page 2.</description>
-            <returnType type="Boolean" />
-        </property>
-        <property key="MicroflowToExecute3" type="microflow" required="true">
-            <caption>Microflow 3</caption>
-            <category>Behavior</category>
-            <description>The microflow to open page 3.</description>
-            <returnType type="Boolean" />
-        </property>
-         <property key="MicroflowToExecute4" type="microflow" required="true">
-            <caption>Microflow 4</caption>
-            <category>Behavior</category>
-            <description>The microflow to open page 4.</description>
-            <returnType type="Boolean" />
-        </property>
-        <property key="Usertext" type="string">
-            <caption>Text</caption>
+        <property key="itemGroup" type="object" isList="true">
+            <caption>Tab</caption>
             <category>Appearance</category>
-            <description>Add a text!</description>
-            
+            <description>Add the properties to show in your bottom bar</description>
+            <properties>
+
+                <property key="displayPageMicroflow" type="microflow" required="false">
+                    <caption>Microflow 1</caption>
+                    <category>General</category>
+                    <description>The microflow to open page 1.</description>
+                    <returnType type="Boolean" />
+                </property>
+               
+                <property key="displayText" type="string" required="false">
+                    <caption>Name 1</caption>
+                    <category>General</category>
+                    <description>Add a tab name!</description>
+                </property>
+                
+                <property key="iconClass" type="string" required="false">
+                    <caption>CSS Class</caption>
+                    <category>General</category>
+                    <description>Add a css class!</description>
+                </property>
+
+                <property key="displayWithMicroflow" type="boolean" defaultValue="true">
+                    <caption>Use microflow?</caption>
+                    <category>General</category>
+                    <description>Choose whether to display page with a microflow!</description>
+                </property>
+
+                <property key="displayPage" type="form" required="false">
+                    <caption>Page</caption>
+                    <category>General</category>
+                    <description>The page to be navigated by the bottom bar.</description>
+                </property>
+
+            </properties>    
         </property>
     </properties>
 </widget>

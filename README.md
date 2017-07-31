@@ -1,4 +1,4 @@
-# Mendix Bottom Bar widget
+# Bottom-bar
 
 ## Description
 A fast and easy to use bottom navigation bars in mendix mobile and tablet applications

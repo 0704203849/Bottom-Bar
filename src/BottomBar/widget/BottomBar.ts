@@ -6,23 +6,26 @@ import * as dojoClass from "dojo/dom-class";
 import * as dom from "dojo/dom";
 import * as dojohtml from "dojo/html";
 import * as $ from "jquery";
-// import * as JQuery from "BottomBar/lib/jquery-1.11.2";
 
 import "./ui/BottomBar.css";
+
+interface BottomBarItem {
+    displayText: string;
+    iconClass: string;
+    displayPage: string;
+    displayPageMicroflow: string;
+    displayWithMicroflow: boolean;
+}
 
 class BottomBar extends WidgetBase {
 
     // parameters configured in the modeler from the xml file.
 
-    MicroflowToExecute1: string;
-    MicroflowToExecute2: string;
-    MicroflowToExecute3: string;
-    MicroflowToExecute4: string;
-    Usertext: string;
-
+    itemGroup: BottomBarItem[];
     // Internal variables. Non-primitives created in the prototype are shared between all widget instances.
     // private handles: ;
     private contextObject: mendix.lib.MxObject;
+    private mxObject: mendix.lib.MxObject;
 
     postCreate() {
         this.updateRendering();
@@ -42,47 +45,21 @@ class BottomBar extends WidgetBase {
             class: "widget-bottom-bar",
             id: "divv"
         }, this.domNode);
+        this.itemGroup.forEach((barItem: BottomBarItem) => this.createBarItem(bottomBar, barItem));
+    }
 
+    private createBarItem(bottomBar: HTMLElement, barItem: BottomBarItem) {
         domConstruct.create("div", {
             class: "bar-item",
-            innerHTML: "<span>" + this.Usertext + "</span>"
+            innerHTML: "<span>" + barItem.displayText + "</span>"
         }, bottomBar).addEventListener("click", () => {
-            if (this.MicroflowToExecute1) {
-                this.executeMicroflow(this.MicroflowToExecute1, this.contextObject.getGuid());
+            if (barItem.displayWithMicroflow) {
+                this.executeMicroflow(barItem.displayPageMicroflow, this.contextObject.getGuid());
             }
+            this.PageToNavigate(barItem, this.mxObject);
+
         }, false);
 
-        domConstruct.create("div", {
-            class: "bar-item two",
-            innerHTML: "<span>name</span>"
-        }, bottomBar).addEventListener("click", () => {
-            if (this.MicroflowToExecute2) {
-                this.executeMicroflow(this.MicroflowToExecute2, this.contextObject.getGuid());
-            }
-        }, false);
-
-        domConstruct.create("div", {
-            class: "bar-item",
-            innerHTML: "<span>name</span>"
-        }, bottomBar).addEventListener("click", () => {
-            if (this.MicroflowToExecute3) {
-                this.executeMicroflow(this.MicroflowToExecute3, this.contextObject.getGuid());
-            }
-        }, false);
-
-        domConstruct.create("div", {
-            class: "bar-item",
-            innerHTML: "<span>name</span>"
-        }, bottomBar).addEventListener("click", () => {
-            if (this.MicroflowToExecute4) {
-                this.executeMicroflow(this.MicroflowToExecute4, this.contextObject.getGuid());
-            }
-        }, false);
-
-        /*  $("widget-bottom-bar > .bar-item").click(function () {
-              $(this).removeClass("widget-bottom-bar > .bar-item:active");
-              $(this).addClass("widget-bottom-bar > .bar-item:active");
-          });*/
     }
 
     private updateRendering() {
@@ -104,12 +81,26 @@ class BottomBar extends WidgetBase {
         }
     }
 
+    private PageToNavigate(barItem: BottomBarItem, mxObject: mendix.lib.MxObject) {
+        const context = this.mxcontext;
+        // context.setContext( mxObject.getGuid());
+        if (!mxObject || !mxObject.getGuid()) {
+            return;
+        }
+        if (barItem.displayPage) {
+            window.mx.ui.openForm(barItem.displayPage, {
+                context,
+                error: error => window.mx.ui.error(`Error while opening page ${barItem.displayPage}: ${error.message}`)
+            });
+        }
+    }
+
     private executeMicroflow(microflow: string, guid: string, cb?: (obj: mendix.lib.MxObject) => void) {
         if (microflow && guid) {
             mx.ui.action(microflow, {
                 params: {
                     applyto: "selection",
-                    guids: [ guid ]
+                    guids: [guid]
                 },
                 callback: (objs: mendix.lib.MxObject) => {
                     if (cb && typeof cb === "function") {
@@ -124,6 +115,7 @@ class BottomBar extends WidgetBase {
     }
 }
 
+// tslint:disable : only-arrow-functions
 dojoDeclare("BottomBar.widget.BottomBar", [WidgetBase], function (Source: any) {
     const result: any = {};
     for (const i in Source.prototype) {
