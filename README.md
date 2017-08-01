@@ -36,7 +36,8 @@ https://github.com/0704203849/Bottom-Bar/issues
 Prerequisite: Install git, node package manager, webpack CLI, grunt CLI, Karma CLI
 To contribute, fork and clone.
 > git clone https://github.com/0704203849/Bottom-Bar.git
-The code is in typescript. Use a typescript IDE of your choice, like Visual Studio Code or WebStorm.
+The code is in typescript. 
+Use a typescript IDE of your choice, like Visual Studio Code or WebStorm.
 To set up the development environment, run:
 > npm install
 To automatically compile, bundle and push code changes to the running Mendix test project, run:
