@@ -5,7 +5,6 @@ import * as dojoStyle from "dojo/dom-style";
 import * as dojoClass from "dojo/dom-class";
 import * as dom from "dojo/dom";
 import * as dojohtml from "dojo/html";
-import * as $ from "jquery";
 
 import "./ui/BottomBar.css";
 
@@ -20,10 +19,9 @@ interface BottomBarItem {
 class BottomBar extends WidgetBase {
 
     // parameters configured in the modeler from the xml file.
-
     itemGroup: BottomBarItem[];
+
     // Internal variables. Non-primitives created in the prototype are shared between all widget instances.
-    // private handles: ;
     private contextObject: mendix.lib.MxObject;
     private mxObject: mendix.lib.MxObject;
 
@@ -42,8 +40,7 @@ class BottomBar extends WidgetBase {
 
     htmldoc() {
         const bottomBar = domConstruct.create("div", {
-            class: "widget-bottom-bar",
-            id: "divv"
+            class: "widget-bottom-bar"
         }, this.domNode);
         this.itemGroup.forEach((barItem: BottomBarItem) => this.createBarItem(bottomBar, barItem));
     }
@@ -51,13 +48,12 @@ class BottomBar extends WidgetBase {
     private createBarItem(bottomBar: HTMLElement, barItem: BottomBarItem) {
         domConstruct.create("div", {
             class: "bar-item",
-            innerHTML: "<span>" + barItem.displayText + "</span>"
+            innerHTML: "<span>" + barItem.displayText + "</span>" + "<i class =" + barItem.iconClass + "></i>"
         }, bottomBar).addEventListener("click", () => {
             if (barItem.displayWithMicroflow) {
                 this.executeMicroflow(barItem.displayPageMicroflow, this.contextObject.getGuid());
             }
-            this.PageToNavigate(barItem, this.mxObject);
-
+            this.PageToNavigate(barItem.displayPage, this.mxObject);
         }, false);
 
     }
@@ -81,16 +77,12 @@ class BottomBar extends WidgetBase {
         }
     }
 
-    private PageToNavigate(barItem: BottomBarItem, mxObject: mendix.lib.MxObject) {
+    private PageToNavigate(Openpage: string, mxObject: mendix.lib.MxObject) {
         const context = this.mxcontext;
-        // context.setContext( mxObject.getGuid());
-        if (!mxObject || !mxObject.getGuid()) {
-            return;
-        }
-        if (barItem.displayPage) {
-            window.mx.ui.openForm(barItem.displayPage, {
+        if (Openpage) {
+            window.mx.ui.openForm(Openpage, {
                 context,
-                error: error => window.mx.ui.error(`Error while opening page ${barItem.displayPage}: ${error.message}`)
+                error: error => window.mx.ui.error(`Error while opening page ${Openpage}: ${error.message}`)
             });
         }
     }

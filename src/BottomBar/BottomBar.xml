@@ -9,18 +9,18 @@
         <property key="itemGroup" type="object" isList="true">
             <caption>Tab</caption>
             <category>Appearance</category>
-            <description>Add the properties to show in your bottom bar</description>
+            <description>Add the tabs to show in your bottom bar</description>
             <properties>
 
                 <property key="displayPageMicroflow" type="microflow" required="false">
-                    <caption>Microflow 1</caption>
+                    <caption>Microflow</caption>
                     <category>General</category>
                     <description>The microflow to open page 1.</description>
                     <returnType type="Boolean" />
                 </property>
                
                 <property key="displayText" type="string" required="false">
-                    <caption>Name 1</caption>
+                    <caption>Tab name</caption>
                     <category>General</category>
                     <description>Add a tab name!</description>
                 </property>
@@ -28,7 +28,7 @@
                 <property key="iconClass" type="string" required="false">
                     <caption>CSS Class</caption>
                     <category>General</category>
-                    <description>Add a css class!</description>
+                    <description>Add a css class for an icon!</description>
                 </property>
 
                 <property key="displayWithMicroflow" type="boolean" defaultValue="true">
