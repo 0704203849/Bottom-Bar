@@ -8,12 +8,14 @@ import * as dojohtml from "dojo/html";
 
 import "./ui/BottomBar.css";
 
+type WidgetAction = "doNothing" | "showPage" | "callMicroflow";
+
 interface BottomBarItem {
     displayText: string;
     iconClass: string;
     displayPage: string;
     displayPageMicroflow: string;
-    displayWithMicroflow: boolean;
+    WidgetActions: WidgetAction;
 }
 
 class BottomBar extends WidgetBase {
@@ -21,8 +23,7 @@ class BottomBar extends WidgetBase {
     // parameters configured in the modeler from the xml file.
     itemGroup: BottomBarItem[];
 
-    // Internal variables. Non-primitives created in the prototype are shared between all widget instances.
-    private contextObject: mendix.lib.MxObject;
+    // Internal variables
     private mxObject: mendix.lib.MxObject;
 
     postCreate() {
@@ -30,7 +31,7 @@ class BottomBar extends WidgetBase {
     }
 
     update(object: mendix.lib.MxObject, callback?: () => void) {
-        this.contextObject = object;
+        this.mxObject = object;
         this.resetSubscriptions();
         this.updateRendering();
         if (callback) {
@@ -38,7 +39,14 @@ class BottomBar extends WidgetBase {
         }
     }
 
-    htmldoc() {
+    private updateRendering() {
+        if (this.mxObject) {
+            dojoStyle.set(this.domNode, "hidden");
+            this.HtmlDomElements();
+        }
+    }
+
+    HtmlDomElements() {
         const bottomBar = domConstruct.create("div", {
             class: "widget-bottom-bar"
         }, this.domNode);
@@ -48,63 +56,48 @@ class BottomBar extends WidgetBase {
     private createBarItem(bottomBar: HTMLElement, barItem: BottomBarItem) {
         domConstruct.create("div", {
             class: "bar-item",
-            innerHTML: "<span>" + barItem.displayText + "</span>" + "<i class =" + barItem.iconClass + "></i>"
+            innerHTML: `<span style class="glyphicon ${barItem.iconClass}"></span>
+            <span> ${barItem.displayText}</span>`
+            // onClick: this.executeAction(barItem.displayPage, barItem.displayPageMicroflow, barItem.WidgetActions)
         }, bottomBar).addEventListener("click", () => {
-            if (barItem.displayWithMicroflow) {
-                this.executeMicroflow(barItem.displayPageMicroflow, this.contextObject.getGuid());
-            }
-            this.PageToNavigate(barItem.displayPage, this.mxObject);
+            this.executeAction(barItem.displayPage, barItem.displayPageMicroflow, barItem.WidgetActions);
         }, false);
 
     }
 
-    private updateRendering() {
-        if (this.contextObject) {
-            dojoStyle.set(this.domNode, "hidden");
-            this.htmldoc();
-        } else {
-            dojoStyle.set(this.domNode, "hidden");
+    private executeAction(openPage: string, microflow: string, WidgetActions: WidgetAction) {
+        const context = this.mxcontext;
+
+        if (microflow && WidgetActions === "callMicroflow") {
+            window.mx.ui.action(microflow, {
+                context,
+                error: error => window.mx.ui.error(`Error while executing microflow`)
+
+            });
+
+        } else if (openPage && WidgetActions === "showPage") {
+            window.mx.ui.openForm(openPage, {
+                context,
+                error: error => window.mx.ui.error(`Error while opening page`)
+            });
         }
     }
 
     private resetSubscriptions() {
         this.unsubscribeAll();
-        if (this.contextObject) {
+        if (this.mxObject) {
             this.subscribe({
                 callback: () => this.updateRendering(),
-                guid: this.contextObject.getGuid()
+                guid: this.mxObject.getGuid()
             });
         }
     }
 
-    private PageToNavigate(Openpage: string, mxObject: mendix.lib.MxObject) {
-        const context = this.mxcontext;
-        if (Openpage) {
-            window.mx.ui.openForm(Openpage, {
-                context,
-                error: error => window.mx.ui.error(`Error while opening page ${Openpage}: ${error.message}`)
-            });
-        }
-    }
+    /*uninitialize(): boolean {
+       // this.removeEvents();
+        return true;
+    }*/
 
-    private executeMicroflow(microflow: string, guid: string, cb?: (obj: mendix.lib.MxObject) => void) {
-        if (microflow && guid) {
-            mx.ui.action(microflow, {
-                params: {
-                    applyto: "selection",
-                    guids: [guid]
-                },
-                callback: (objs: mendix.lib.MxObject) => {
-                    if (cb && typeof cb === "function") {
-                        cb(objs);
-                    }
-                },
-                error: (error) => {
-                    mx.ui.error("Error executing microflow " + microflow + " : " + error.message);
-                }
-            }, this);
-        }
-    }
 }
 
 // tslint:disable : only-arrow-functions

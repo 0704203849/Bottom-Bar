@@ -1,5 +1,5 @@
 {
-  "name": "BottomBar",
+  "name": "bottombar",
   "widgetName": "BottomBar",
   "version": "0.1.0",
   "description": "This widget is used as a Bottom Navigation Bar in a mobile or tab application.",
