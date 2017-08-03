@@ -34,9 +34,7 @@
     height: 100%;
     transition: flex 0.5s ease;
     border-right: 0.09px solid white;
-    /*touch-action: 
-    /*justify-content: center;*/
-    
+  
 }
 
 .widget-bottom-bar > .bar-item:active{
