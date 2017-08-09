@@ -2,7 +2,7 @@
   "name": "bottombar",
   "widgetName": "BottomBar",
   "version": "0.1.0",
-  "description": "This widget is used as a Bottom Navigation Bar in a mobile or tab application.",
+  "description": "The bottom bar is used as a navigation bar in a mobile or tablet application.",
   "author": "Joseph Majanga & Suuna Conrad",
   "copyright": "Flock of Birds",
   "private": true,
