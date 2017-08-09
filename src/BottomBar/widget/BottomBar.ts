@@ -2,9 +2,7 @@ import * as dojoDeclare from "dojo/_base/declare";
 import * as WidgetBase from "mxui/widget/_WidgetBase";
 import * as domConstruct from "dojo/dom-construct";
 import * as dojoStyle from "dojo/dom-style";
-import * as dojoClass from "dojo/dom-class";
 import * as dom from "dojo/dom";
-import * as dojohtml from "dojo/html";
 
 import "./ui/BottomBar.css";
 
@@ -20,10 +18,8 @@ interface BottomBarItem {
 
 class BottomBar extends WidgetBase {
 
-    // parameters configured in the modeler from the xml file.
     itemGroup: BottomBarItem[];
 
-    // Internal variables
     private mxObject: mendix.lib.MxObject;
 
     postCreate() {
@@ -42,11 +38,11 @@ class BottomBar extends WidgetBase {
     private updateRendering() {
         if (this.mxObject) {
             dojoStyle.set(this.domNode, "hidden");
-            this.HtmlDomElements();
+            this.createBar();
         }
     }
 
-    HtmlDomElements() {
+    createBar() {
         const bottomBar = domConstruct.create("div", {
             class: "widget-bottom-bar"
         }, this.domNode);
@@ -56,13 +52,13 @@ class BottomBar extends WidgetBase {
     private createBarItem(bottomBar: HTMLElement, barItem: BottomBarItem) {
         domConstruct.create("div", {
             class: "bar-item",
-            innerHTML: `<span style class="glyphicon ${barItem.iconClass}"></span>
-            <span> ${barItem.displayText}</span>`
-            // onClick: this.executeAction(barItem.displayPage, barItem.displayPageMicroflow, barItem.WidgetActions)
+            innerHTML: `<span class = "content">
+                            <span class="glyphicon ${barItem.iconClass}"></span>
+                            <p><span>${barItem.displayText}</span>
+                        </span>`
         }, bottomBar).addEventListener("click", () => {
             this.executeAction(barItem.displayPage, barItem.displayPageMicroflow, barItem.WidgetActions);
         }, false);
-
     }
 
     private executeAction(openPage: string, microflow: string, WidgetActions: WidgetAction) {
@@ -72,9 +68,7 @@ class BottomBar extends WidgetBase {
             window.mx.ui.action(microflow, {
                 context,
                 error: error => window.mx.ui.error(`Error while executing microflow`)
-
             });
-
         } else if (openPage && WidgetActions === "showPage") {
             window.mx.ui.openForm(openPage, {
                 context,
@@ -94,7 +88,7 @@ class BottomBar extends WidgetBase {
     }
 
     /*uninitialize(): boolean {
-       // this.removeEvents();
+
         return true;
     }*/
 

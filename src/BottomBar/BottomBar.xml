@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <widget id="BottomBar.widget.BottomBar" needsEntityContext="true" xmlns="http://www.mendix.com/widget/1.0/">
     <name>Bottom bar</name>
-    <description>This widget is used as a Navigation Bar in a mobile or tab application.</description>
+    <description>The bottom bar is used as a navigation bar in a mobile or tablet application.</description>
 
     <icon />
 
@@ -11,7 +11,6 @@
             <category>Data source</category>
             <description>Add tabs to show in your bottom bar</description>
             <properties>
-
                 <property key="WidgetActions" type="enumeration" defaultValue="doNothing">
                     <caption>On click</caption>
                     <category>Events</category>
@@ -22,38 +21,27 @@
                         <enumerationValue key="callMicroflow">Call a microflow</enumerationValue>
                     </enumerationValues>
                 </property>
-
                 <property key="displayPageMicroflow" type="microflow" required="false">
                     <caption>Microflow</caption>
                     <category>Events</category>
                     <description>Microflow to execute</description>
                     <returnType type="Boolean" />
                 </property>
-
                 <property key="displayPage" type="form" required="false">
                     <caption>Page</caption>
                     <category>Events</category>
                     <description>The page to open</description>
                 </property>
-             
                 <property key="displayText" type="string" required="false">
                     <caption>Name</caption>
                     <category>Styling</category>
                     <description>Add a tab name</description>
                 </property>
-                
                 <property key="iconClass" type="string" required="false">
                     <caption>CSS class</caption>
                     <category>Styling</category>
                     <description>Add a css class for an icon</description>
                 </property>
-
-               <!-- <property key="displayWithMicroflow" type="boolean" defaultValue="true">
-                    <caption>Use microflow?</caption>
-                    <category>General</category>
-                    <description>Choose whether to display page with a microflow!</description>
-                </property>-->
-
             </properties>    
         </property>
     </properties>

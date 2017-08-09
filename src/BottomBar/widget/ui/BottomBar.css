@@ -1,7 +1,3 @@
-/**{
-    padding-bottom: 8%;
-}*/
-
 .widget-bottom-bar {
     display: inline-block;
     width: 100%;
@@ -10,14 +6,15 @@
     left: 50%;
     height: 8%;
     clear: both;
-    /*padding-top: 10%;
-    /*margin-bottom: initial;
-    /*-webkit-transform: translateX(-50%);*/
     transform: translateX(-50%);
     display: flex;
     flex-direction: row;
     flex-wrap: no-wrap;
     justify-content: center;
+    padding: 0;
+    margin: 0 auto;
+    border-top: 0px;
+    color:white;
     z-index: 1000;
 }
 
@@ -25,16 +22,20 @@
     float: left;
     padding: 20px;
     text-align: center;
+    vertical-align: middle;
     align-items: center;
     flex: 1;
     align-self: flex-end;
-        
     color: white;
+    font-size: 10px;
     background:darkslategray;
     height: 100%;
     transition: flex 0.5s ease;
-    border-right: 0.09px solid white;
-  
+    border-right: 1px solid #576979;
+}
+
+.glyphicon{
+    font-size: 22px;
 }
 
 .widget-bottom-bar > .bar-item:active{
@@ -45,7 +46,68 @@
     border-right: 0px;
 }
 
+/*phone stylings*/
+@media (min-width: 320px){
+    .widget-bottom-bar {
+        height: 10%;
+        clear: both;
+        justify-content: center;
+        z-index: 1000;
+    }
 
-/*.widget-bottom-bar > .bar-item:target{
-   background:black; 
-}*/
+    .widget-bottom-bar > .bar-item {
+        text-align: 5%;
+        vertical-align: middle;
+        align-items: center;
+        height: 100%;
+    }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+    .widget-bottom-bar {
+        height: 12%;
+        clear: both;
+        justify-content: center;
+        z-index: 1000;
+    }
+
+    .widget-bottom-bar > .bar-item {
+        text-align: 6%;
+        vertical-align: middle;
+        align-items: center;
+        height: 100%;
+    }   
+}
+
+/*tablet stylings*/
+@media (min-width: 768px) {
+    .widget-bottom-bar {
+        height: 7%;
+        clear: both;
+        justify-content: center;
+        z-index: 1000;
+    }
+
+    .widget-bottom-bar > .bar-item {
+        text-align: 3.5%;
+        vertical-align: middle;
+        align-items: center;
+        height: 100%;
+    }   
+}
+
+@media (min-width: 1024px) and (orientation: landscape) {
+    .widget-bottom-bar {
+        height: 9%;
+        clear: both;
+        justify-content: center;
+        z-index: 1000;
+    }
+
+    .widget-bottom-bar > .bar-item {
+        text-align: 4.5%;
+        vertical-align: middle;
+        align-items: center;
+        height: 100%;
+    }   
+}
