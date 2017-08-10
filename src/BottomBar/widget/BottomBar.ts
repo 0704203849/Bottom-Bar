@@ -2,7 +2,6 @@ import * as dojoDeclare from "dojo/_base/declare";
 import * as WidgetBase from "mxui/widget/_WidgetBase";
 import * as domConstruct from "dojo/dom-construct";
 import * as dojoStyle from "dojo/dom-style";
-import * as dom from "dojo/dom";
 
 import "./ui/BottomBar.css";
 
@@ -46,7 +45,7 @@ class BottomBar extends WidgetBase {
         const bottomBar = domConstruct.create("div", {
             class: "widget-bottom-bar"
         }, this.domNode);
-        this.itemGroup.forEach((barItem: BottomBarItem) => this.createBarItem(bottomBar, barItem));
+        this.itemGroup.forEach(barItem => this.createBarItem(bottomBar, barItem));
     }
 
     private createBarItem(bottomBar: HTMLElement, barItem: BottomBarItem) {
@@ -61,18 +60,16 @@ class BottomBar extends WidgetBase {
         }, false);
     }
 
-    private executeAction(openPage: string, microflow: string, WidgetActions: WidgetAction) {
-        const context = this.mxcontext;
-
+    private executeAction(Page: string, microflow: string, WidgetActions: WidgetAction) {
         if (microflow && WidgetActions === "callMicroflow") {
             window.mx.ui.action(microflow, {
-                context,
-                error: error => window.mx.ui.error(`Error while executing microflow`)
+                context: this.mxcontext,
+                error: () => window.mx.ui.error(`Error while executing microflow`)
             });
-        } else if (openPage && WidgetActions === "showPage") {
-            window.mx.ui.openForm(openPage, {
-                context,
-                error: error => window.mx.ui.error(`Error while opening page`)
+        } else if (Page && WidgetActions === "showPage") {
+            window.mx.ui.openForm(Page, {
+                context: this.mxcontext,
+                error: () => window.mx.ui.error(`Error while opening page`)
             });
         }
     }

@@ -4,7 +4,7 @@
     position: fixed;
     bottom: 0px;
     left: 50%;
-    height: 8%;
+    height: 80px;
     clear: both;
     transform: translateX(-50%);
     display: flex;
@@ -20,7 +20,7 @@
 
 .widget-bottom-bar > .bar-item {
     float: left;
-    padding: 20px;
+    padding: 30px 20px 20px 20px;;
     text-align: center;
     vertical-align: middle;
     align-items: center;
@@ -44,70 +44,4 @@
 
 .widget-bottom-bar > .bar-item:last-child{
     border-right: 0px;
-}
-
-/*phone stylings*/
-@media (min-width: 320px){
-    .widget-bottom-bar {
-        height: 10%;
-        clear: both;
-        justify-content: center;
-        z-index: 1000;
-    }
-
-    .widget-bottom-bar > .bar-item {
-        text-align: 5%;
-        vertical-align: middle;
-        align-items: center;
-        height: 100%;
-    }
-}
-
-@media (max-width: 768px) and (orientation: landscape) {
-    .widget-bottom-bar {
-        height: 12%;
-        clear: both;
-        justify-content: center;
-        z-index: 1000;
-    }
-
-    .widget-bottom-bar > .bar-item {
-        text-align: 6%;
-        vertical-align: middle;
-        align-items: center;
-        height: 100%;
-    }   
-}
-
-/*tablet stylings*/
-@media (min-width: 768px) {
-    .widget-bottom-bar {
-        height: 7%;
-        clear: both;
-        justify-content: center;
-        z-index: 1000;
-    }
-
-    .widget-bottom-bar > .bar-item {
-        text-align: 3.5%;
-        vertical-align: middle;
-        align-items: center;
-        height: 100%;
-    }   
-}
-
-@media (min-width: 1024px) and (orientation: landscape) {
-    .widget-bottom-bar {
-        height: 9%;
-        clear: both;
-        justify-content: center;
-        z-index: 1000;
-    }
-
-    .widget-bottom-bar > .bar-item {
-        text-align: 4.5%;
-        vertical-align: middle;
-        align-items: center;
-        height: 100%;
-    }   
 }
