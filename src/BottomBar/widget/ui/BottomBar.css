@@ -20,7 +20,7 @@
 
 .widget-bottom-bar > .bar-item {
     float: left;
-    padding: 30px 20px 20px 20px;;
+    padding: 30px 20px 20px 20px;
     text-align: center;
     vertical-align: middle;
     align-items: center;
@@ -32,6 +32,10 @@
     height: 100%;
     transition: flex 0.5s ease;
     border-right: 1px solid #576979;
+}
+
+.showerror{
+    background-color: red;
 }
 
 .glyphicon{

@@ -20,6 +20,7 @@ class BottomBar extends WidgetBase {
     itemGroup: BottomBarItem[];
 
     private mxObject: mendix.lib.MxObject;
+    BaItem: BottomBarItem;
 
     postCreate() {
         this.updateRendering();
@@ -38,6 +39,11 @@ class BottomBar extends WidgetBase {
         if (this.mxObject) {
             dojoStyle.set(this.domNode, "hidden");
             this.createBar();
+            const barItem: BottomBarItem = ({
+                displayText: "", iconClass: "", displayPage: "",
+                displayPageMicroflow: "",
+                WidgetActions: "doNothing"});
+            this.showError(this.validateProperties(barItem.displayText, barItem.iconClass));
         }
     }
 
@@ -60,16 +66,33 @@ class BottomBar extends WidgetBase {
         }, false);
     }
 
+    validateProperties(name: string, icon: string): string {
+        let errorMessage = "";
+        if (name) {
+            errorMessage = "a tab name is required";
+        } else if (icon) {
+            errorMessage = "an icon is required";
+        }
+        return errorMessage;
+    }
+
+    private showError(message: string) {
+        if (message) {
+            domConstruct.create("div", {
+                class: "showerror",
+                innerHTML: `<div> ${message}</div>`
+            }, this.domNode);
+        }
+    }
+
     private executeAction(Page: string, microflow: string, WidgetActions: WidgetAction) {
         if (microflow && WidgetActions === "callMicroflow") {
             window.mx.ui.action(microflow, {
-                context: this.mxcontext,
-                error: () => window.mx.ui.error(`Error while executing microflow`)
+                context: this.mxcontext
             });
         } else if (Page && WidgetActions === "showPage") {
             window.mx.ui.openForm(Page, {
-                context: this.mxcontext,
-                error: () => window.mx.ui.error(`Error while opening page`)
+                context: this.mxcontext
             });
         }
     }
@@ -88,7 +111,6 @@ class BottomBar extends WidgetBase {
 
         return true;
     }*/
-
 }
 
 // tslint:disable : only-arrow-functions
