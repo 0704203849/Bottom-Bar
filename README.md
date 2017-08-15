@@ -28,7 +28,7 @@ Mendix 6
 The users can add the classes to the project theme.
 
 ## Limitations
--Mainly applies to MOBILE PHONES AND TABLETS  hence the widget may  not be suitable for COMPUTERS(desktop computers)
+Mainly applies to MOBILE PHONES AND TABLETS  hence the widget may  not be suitable for COMPUTERS(desktop computers)
 
 
 ## Issues, suggestions and feature requests
