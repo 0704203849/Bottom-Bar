@@ -38,12 +38,7 @@ class BottomBar extends WidgetBase {
     private updateRendering() {
         if (this.mxObject) {
             dojoStyle.set(this.domNode, "hidden");
-            this.createBar();
-            const barItem: BottomBarItem = ({
-                displayText: "", iconClass: "", displayPage: "",
-                displayPageMicroflow: "",
-                WidgetActions: "doNothing"});
-            this.showError(this.validateProperties(barItem.displayText, barItem.iconClass));
+            this.createBar();   
         }
     }
 
@@ -55,6 +50,15 @@ class BottomBar extends WidgetBase {
     }
 
     private createBarItem(bottomBar: HTMLElement, barItem: BottomBarItem) {
+        let text = "";
+        if(!barItem.displayText.trim() && !barItem.iconClass){
+            text = "tab cannot be empty";
+            domConstruct.create("div", {
+                class: "showerror",
+                innerHTML: `<div> ${text}</div>`
+            }, this.domNode);
+        } 
+        else{
         domConstruct.create("div", {
             class: "bar-item",
             innerHTML: `<span class = "content">
@@ -64,24 +68,6 @@ class BottomBar extends WidgetBase {
         }, bottomBar).addEventListener("click", () => {
             this.executeAction(barItem.displayPage, barItem.displayPageMicroflow, barItem.WidgetActions);
         }, false);
-    }
-
-    validateProperties(name: string, icon: string): string {
-        let errorMessage = "";
-        if (name) {
-            errorMessage = "a tab name is required";
-        } else if (icon) {
-            errorMessage = "an icon is required";
-        }
-        return errorMessage;
-    }
-
-    private showError(message: string) {
-        if (message) {
-            domConstruct.create("div", {
-                class: "showerror",
-                innerHTML: `<div> ${message}</div>`
-            }, this.domNode);
         }
     }
 
