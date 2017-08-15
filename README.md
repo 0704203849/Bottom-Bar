@@ -1,16 +1,21 @@
 ## Bottom-bar
--This widget is a navigation bar that is placed at the bottom of a screen. It’s  the reason it’s called a bottom bar
--It is used for navigation through multiple pages. It mainly makes a user’s task of perusing through many pages easy.
+This widget is a navigation bar that is placed at the bottom of a screen. It’s  the reason it’s called a bottom bar.
+
+It is used for navigation through multiple pages.
 
 
 ## Features
  
--The bottom bar will contain tabs that will help with navigation.
--It will also allow the user to customize the tab names to the user’s preference.
--The widget will allow the users to be able to dictate the number of tabs they want 
+The bottom bar will contain tabs that will help with navigation.
+
+It will also allow the user to customize the tab names to the user’s preference.
+
+The widget will allow the users to be able to dictate the number of tabs they want 
 the bottom bar to have.
--It allows the user to also add icons of his/her choice.
--It allows  the user to see the active page i.e the page that  has been clicked on and being viewed 
+
+It allows the user to also add icons of his/her choice.
+
+It allows  the user to see the active page i.e the page that  has been clicked on and being viewed 
 by the user at the moment.
 
 
@@ -33,7 +38,7 @@ https://github.com/0704203849/Bottom-Bar/issues
 
 ## Development
 
-Prerequisite: Install git, node package manager, webpack CLI, grunt CLI, Karma CLI
+Prerequisite: Install git, node package manager, webpack CLI, grunt CLI
 
 To contribute, fork and clone.
 
