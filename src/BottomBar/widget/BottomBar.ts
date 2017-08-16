@@ -5,7 +5,7 @@ import * as dojoStyle from "dojo/dom-style";
 
 import "./ui/BottomBar.css";
 
-type WidgetAction = "doNothing" | "showPage" | "callMicroflow";
+type WidgetAction = "doNothing" | "showPage" | "callMicroflow";                            /*enumeration */
 
 interface BottomBarItem {
     displayText: string;
@@ -15,15 +15,14 @@ interface BottomBarItem {
     WidgetActions: WidgetAction;
 }
 
-class BottomBar extends WidgetBase {
+class BottomBar extends WidgetBase {                                                              /*inheritance */
 
     itemGroup: BottomBarItem[];
 
     private mxObject: mendix.lib.MxObject;
-    BaItem: BottomBarItem;
 
     postCreate() {
-        this.updateRendering();
+        
     }
 
     update(object: mendix.lib.MxObject, callback?: () => void) {
@@ -37,7 +36,7 @@ class BottomBar extends WidgetBase {
 
     private updateRendering() {
         if (this.mxObject) {
-            dojoStyle.set(this.domNode, "hidden");
+            dojoStyle.set(this.domNode, "display");
             this.createBar();   
         }
     }
@@ -50,12 +49,12 @@ class BottomBar extends WidgetBase {
     }
 
     private createBarItem(bottomBar: HTMLElement, barItem: BottomBarItem) {
-        let text = "";
-        if(!barItem.displayText.trim() && !barItem.iconClass){
-            text = "tab cannot be empty";
+        let errorMessage = "";
+         if(!barItem.displayText && !barItem.iconClass){
+            errorMessage = "tab cannot be empty";
             domConstruct.create("div", {
                 class: "showerror",
-                innerHTML: `<div> ${text}</div>`
+                innerHTML: `<div> ${errorMessage}</div>`
             }, this.domNode);
         } 
         else{
@@ -83,7 +82,7 @@ class BottomBar extends WidgetBase {
         }
     }
 
-    private resetSubscriptions() {
+    private resetSubscriptions() {                                                         
         this.unsubscribeAll();
         if (this.mxObject) {
             this.subscribe({
